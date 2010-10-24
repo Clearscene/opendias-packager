@@ -1,0 +1,2 @@
+shlibs:Depends=libarchive1 (>= 2.0.25), libc6 (>= 2.3.6-6~), libc6 (>= 2.4), libespeak1 (>= 1.30), libfreeimage3 (>= 3.10.0), libgcc1 (>= 1:4.1.1), libglib2.0-0 (>= 2.16.0), libmicrohttpd5, libsane (>= 1.0.11-3), libsqlite3-0 (>= 3.6.22), libstdc++6 (>= 4.1.1), libtiff4, libuuid1 (>= 2.16), libxml2 (>= 2.7.4), libzzip-0-13 (>= 0.13.56)
+misc:Depends=
