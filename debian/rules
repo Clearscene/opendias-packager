@@ -37,7 +37,7 @@ binary-indep: install
 	cp conf/opendias.conf ${TMP}/etc/opendias/opendias.conf
 	cp bin/opendias ${TMP}/usr/local/sbin/opendias
 	cp webcontent ${TMP}/usr/local/share/opendias/ -r
-	cp conf/sql/* ${TMP}/usr/local/share/opendias/
+	cp conf/sql/*.sql ${TMP}/usr/local/share/opendias/
 
 # Build architecture-dependent files here.
 binary-arch: install

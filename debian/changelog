@@ -1,3 +1,9 @@
+clearscene-opendias (0.5.6) lucid; urgency=low
+
+  * Allow variable length scans
+
+ -- wbooth <wbooth@clearscene.net>  Sun, 24 Oct 2010 11:32:57 +0100
+
 clearscene-opendias (0.5.5) lucid; urgency=low
 
   * smooth over UI
