@@ -1,3 +1,11 @@
+clearscene-opendias (0.5.7) lucid; urgency=low
+
+  * UI Tweaks
+  * beginnings of access controls
+  * input validation
+
+ -- wbooth <wbooth@clearscene.net>  Mon, 01 Nov 2010 20:51:28 +0000
+
 clearscene-opendias (0.5.6) lucid; urgency=low
 
   * Allow variable length scans
