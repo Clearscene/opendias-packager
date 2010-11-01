@@ -1,3 +1,9 @@
+clearscene-opendias (0.5.8) lucid; urgency=low
+
+  * various fixes
+
+ -- wbooth <wbooth@clearscene.net>  Mon, 01 Nov 2010 22:39:05 +0000
+
 clearscene-opendias (0.5.7) lucid; urgency=low
 
   * UI Tweaks
