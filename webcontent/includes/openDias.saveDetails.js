@@ -78,9 +78,15 @@ function physicallyMoveTag(tagid) {
   if(list=="available") {
     document.getElementById('available').getElementsByTagName('tbody')[0].removeChild(tr);
     document.getElementById('selected').getElementsByTagName('tbody')[0].appendChild(tr);
+    $('#'+tagid).one('dblclick', function() {
+      moveTag( $(this).attr('id'), 'remove' );
+    });
   } else {
     document.getElementById('selected').getElementsByTagName('tbody')[0].removeChild(tr);
     document.getElementById('available').getElementsByTagName('tbody')[0].appendChild(tr);
+    $('#'+tagid).one('dblclick', function() {
+      moveTag( $(this).attr('id'), 'add' );
+    });
   }
 
   $("#available")
@@ -99,6 +105,27 @@ function physicallyMoveTag(tagid) {
 //  e_tag.appendChild(document.createTextNode(tag));
 //  tr.appendChild(e_tag);
 
+}
+
+function oncloseEvent() {
+  var notComplete = 0;
+  var msg = "";
+  if(document.getElementById('title').value == "New (untitled) document.") {
+    notComplete = 1;
+    msg += "Document Title is still the default. ";
+  }
+  if(document.getElementById('docDate').value == " - No date set -") {
+    notComplete = 1;
+    msg += "Document Date is still the default. ";
+  }
+  if(document.getElementById('selected').getElementsByTagName('tr').length == 1) {
+    notComplete = 1;
+    msg += "Document has not assigned tags. ";
+  }
+
+  if(notComplete == 1) {
+    return "Document details are incomplete: "+msg;
+  }
 }
 
 $(document).ready(function() {
@@ -128,3 +155,4 @@ $(document).ready(function() {
 
 });
 
+window.onbeforeunload = oncloseEvent;

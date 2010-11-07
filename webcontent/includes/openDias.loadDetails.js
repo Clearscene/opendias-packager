@@ -23,12 +23,12 @@ function applyNewRow(tagid, tag, selected) {
 
   if(selected=="NULL") {
     document.getElementById('available').getElementsByTagName('tbody')[0].appendChild(tr);
-    $('#tagid_'+tagid).dblclick(function() {
+    $('#tagid_'+tagid).one('dblclick', function() {
       moveTag( $(this).attr('id'), 'add' );
     });
   } else {
     document.getElementById('selected').getElementsByTagName('tbody')[0].appendChild(tr);
-    $('#tagid_'+tagid).dblclick(function() {
+    $('#tagid_'+tagid).one('dblclick', function() {
       moveTag( $(this).attr('id'), 'remove' );
     });
   }
@@ -44,6 +44,10 @@ $(document).ready(function() {
                                         cache: false,
                                         type: "POST",
                                         success: function(data){
+                                                  if($(data).find('error').text()) {
+                                                    alert("Unable to get the audio: "+$(data).find('error').text());
+                                                    return 1;
+                                                  }
                                                  id = $(data).find('filename').text();
                                                  $('#audio').attr('src','/audio/'+id);
                                                  }
@@ -58,7 +62,7 @@ $(document).ready(function() {
          type: "POST",
          success: function(data){
            if( $(data).find('error').text() ){
-             alert("Error in fetching details.");
+             alert("Unable to get document details: "+$(data).find('error').text());
              return 1;
            }
            officialDocId = $(data).find('docid').text();
@@ -112,6 +116,40 @@ $(document).ready(function() {
 
          }
   });
+
+  $('#title').autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "/dynamic",
+          dataType: "json",
+          type: "POST",
+          data: {
+            action: "titleAutoComplete",
+            startsWith: request.term
+          },
+          success: function( data ) {
+            response( $.map( data.results, function( item ) {
+              return {
+                label: item.title,
+                value: item.title
+              }
+            }));
+          }
+        });
+      },
+      minLength: 2,
+      select: function( event, ui ) {
+      //  log( ui.item ?
+      //    "Selected: " + ui.item.label :
+      //    "Nothing selected, input was " + this.value);
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
 
 });
 
