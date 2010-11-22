@@ -1,3 +1,10 @@
+clearscene-opendias (0.5.11) lucid; urgency=low
+
+  * more on: uploading files, admin of access controls, ui improvements, more...
+
+
+ -- wbooth <wbooth@clearscene.net>  Mon, 22 Nov 2010 16:42:32 +0000
+
 clearscene-opendias (0.5.10) lucid; urgency=low
 
   * More ui improvements
