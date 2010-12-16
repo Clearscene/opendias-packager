@@ -1,4 +1,5 @@
 etc/opendias
+etc/init.d
 usr/local/sbin
 usr/local/share/opendias
 var/lib/opendias

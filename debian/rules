@@ -35,6 +35,7 @@ install: build
 # Build architecture-independent files here.
 binary-indep: install
 	cp conf/opendias.conf ${TMP}/etc/opendias/opendias.conf
+	cp etc/clearscene-opendias.sh ${TMP}/etc/init.d/clearscene-opendias.sh
 	cp bin/opendias ${TMP}/usr/local/sbin/opendias
 	cp webcontent ${TMP}/usr/local/share/opendias/ -r
 	cp conf/sql/*.sql ${TMP}/usr/local/share/opendias/

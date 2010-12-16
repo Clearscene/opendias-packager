@@ -1,3 +1,9 @@
+clearscene-opendias (0.5.12) lucid; urgency=low
+
+  * make it daemonisable
+
+ -- wbooth <wbooth@clearscene.net>  Thu, 16 Dec 2010 13:20:55 +0000
+
 clearscene-opendias (0.5.11) lucid; urgency=low
 
   * more on: uploading files, admin of access controls, ui improvements, more...
