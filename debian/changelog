@@ -1,3 +1,22 @@
+clearscene-opendias (0.5.15) lucid; urgency=low
+
+  * finish file import
+
+ -- wbooth <wbooth@clearscene.net>  Sat, 08 Jan 2011 15:38:20 +0000
+
+clearscene-opendias (0.5.14) lucid; urgency=low
+
+  * Update to loggin
+  * chage the default URL to start "/opendias/" to allow the use of webserver no port proxying
+
+ -- wbooth <wbooth@clearscene.net>  Wed, 29 Dec 2010 12:34:13 +0000
+
+clearscene-opendias (0.5.13) lucid; urgency=low
+
+  * Better Daemon setup
+
+ -- wbooth <wbooth@clearscene.net>  Mon, 20 Dec 2010 20:13:38 +0000
+
 clearscene-opendias (0.5.12) lucid; urgency=low
 
   * make it daemonisable

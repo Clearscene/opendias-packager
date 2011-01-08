@@ -1,9 +1,9 @@
 
-<script type="text/javascript" src="/includes/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/includes/jquery.canvas-loader.js"></script>
-<link rel="stylesheet" href="/style/jquery-ui.css" type="text/css" media="screen" /> 
+<script type="text/javascript" src="/opendias/includes/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/opendias/includes/jquery.canvas-loader.js"></script>
+<link rel="stylesheet" href="/opendias/style/jquery-ui.css" type="text/css" media="screen" /> 
 <style>
-  .ui-progressbar-value { background-image: url(/images/jquery-ui/pbar-ani.png); }
+  .ui-progressbar-value { background-image: url(/opendias/images/jquery-ui/pbar-ani.png); }
   #tabs {font-size: 11px;}
 </style>
 
@@ -29,8 +29,8 @@
   <div id="office">
     <h3>Document Import</h3>
     <p>Select a PDF, ODF document or JPEG image for upload into your achive.</p>
-    <form action='/dynamic' method='post' enctype="multipart/form-data">
-      <input name='action' type='hidden' value='uploadFile' />
+    <form action='/opendias/dynamic' method='post' enctype="multipart/form-data">
+      <input name='action' type='hidden' value='uploadfile' />
       <div class='row'>
         <div class='label'>Filename to upload:</div>
         <div class='data'><input name='uploadfile' type='file' /></div>
@@ -140,4 +140,4 @@
   </div>
 </div>
 
-<script type="text/javascript" src="/includes/openDias.acquire.js"></script>
+<script type="text/javascript" src="/opendias/includes/openDias.acquire.js"></script>
