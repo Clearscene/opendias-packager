@@ -1,3 +1,9 @@
+clearscene-opendias (0.5.16) lucid; urgency=low
+
+  * Fixes and change ocr default to on
+
+ -- wbooth <wbooth@clearscene.net>  Sat, 15 Jan 2011 11:53:01 +0000
+
 clearscene-opendias (0.5.15) lucid; urgency=low
 
   * finish file import
