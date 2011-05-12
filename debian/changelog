@@ -1,3 +1,18 @@
+clearscene-opendias (0.6.4) lucid; urgency=low
+
+  * fix donation location
+  * Fix various build processes
+  * Fix various file permissions
+
+ -- wbooth <wbooth@clearscene.net>  Thu, 12 May 2011 18:12:29 +0100
+
+clearscene-opendias (0.6.2) lucid; urgency=low
+
+  * Fixes to help get into debian repo
+  * ensure we can compile with various 'optional' libs are missing.
+
+ -- wbooth <wbooth@clearscene.net>  Sun, 08 May 2011 14:26:19 +0100
+
 clearscene-opendias (0.6.1) lucid; urgency=low
 
   * Fixes andbetter testing
