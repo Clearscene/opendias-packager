@@ -43,13 +43,13 @@ case "$1" in
         ;;
   stop)
         echo -n "Stopping $DESC: "
-        start-stop-daemon --stop --pidfile $PID_FILE
+        start-stop-daemon --stop --pidfile $PID_FILE --signal USR1
         echo "$NAME."
         ;;
 
   restart|force-reload)
         echo -n "Restarting $DESC: "
-        start-stop-daemon --stop --pidfile $PID_FILE
+        start-stop-daemon --stop --pidfile $PID_FILE --signal USR1
         sleep 1
         start-stop-daemon -d $APP_PATH -c $RUN_AS --start --pidfile $PID_FILE --exec $DAEMON -- $DAEMON_OPTS
         echo "$NAME."
