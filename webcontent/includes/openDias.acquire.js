@@ -48,7 +48,7 @@ function showStatus(dev, canv, prog) {
 }
 
 
-function getScanProgress (progressId, device) {
+function getScanningProgress (progressId, device) {
 
   $.ajax({ url: "/opendias/dynamic",
 	 dataType: "xml",
@@ -64,8 +64,8 @@ function getScanProgress (progressId, device) {
            }
 
            var finish = 0;
-           status = parseInt( $(dta).find('status').text() );
-           vvalue = parseInt( $(dta).find('value').text() );
+           status = parseInt( $(dta).find('ScanningProgress').find('status').text() );
+           vvalue = parseInt( $(dta).find('ScanningProgress').find('value').text() );
 
            if( status == 0 ) { // SCAN_IDLE,
              $('#status_'+device).text("Setting up.");
@@ -168,7 +168,7 @@ function getScanProgress (progressId, device) {
            }
 
            if(finish == 0) {
-             setTimeout("getScanProgress('"+progressId+"','"+device+"')", 400);
+             setTimeout("getScanningProgress('"+progressId+"','"+device+"')", 400);
            }
 
 	 }
@@ -194,7 +194,7 @@ $(document).ready(function() {
              return 1;
            }
            var deviceid=0;
-           $(data).find('device').each( function() {
+           $(data).find('ScannerList').find('Devices').find('Device').each( function() {
 
              deviceid++;
              var device=deviceid;
@@ -298,10 +298,6 @@ $(document).ready(function() {
              });
              drawSkew(document.getElementById("skewDisplay_c_"+device).getContext("2d"), $("#skewDisplay_p_"+device), 0);
              $("#scanButton_"+device).click( function() {
-               var ocr = "-";
-               if($("#ocr_"+device).is(':checked')) {
-                 ocr = "on";
-               }
                // Stop the form from being changed after submittion
                $("#format_"+device).attr('disabled', 'disabled');
                $("#pagesSlider_"+device).slider('disable');
@@ -322,7 +318,7 @@ $(document).ready(function() {
                                pages: $("#pages_"+device).val(),
                                skew: $("#skew_"+device).val(),
                                resolution: $("#resolution_"+device).val(),
-                               ocr: ocr,
+                               ocr: $("#ocr_"+device).val(),
                                pagelength: $("#length_"+device).val(),
                               },
                         cache: false,
@@ -332,8 +328,8 @@ $(document).ready(function() {
                             alert("Unable to start the scaning process: "+$(data).find('error').text());
                             return 1;
                           }
-                          scanuuid = $(data).find('scanuuid').text();
-                          getScanProgress(scanuuid, device);
+                          scanuuid = $(data).find('DoScan').find('scanuuid').text();
+                          getScanningProgress(scanuuid, device);
                         }
                       });
              });

@@ -22,6 +22,46 @@ $(document).ready(function() {
     sorting = [[res[0],res[1]]];
   }
 
+  $('#tags').tagsInput({ 
+          autocomplete_url: '',
+          onAddTag:function(tag) { return false; },
+          onRemoveTag:function(tag) { getRecordCount() }
+          });
+
+  $('#tags_tag').autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "/opendias/dynamic",
+          dataType: "json",
+          type: "POST",
+          data: {
+            action: "tagsAutoComplete",
+            startsWith: request.term,
+            docid: 0
+          },
+          success: function( data ) {
+            response( $.map( data.results, function( item ) {
+              return {
+                label: item.tag,
+                value: item.tag
+              }
+            }));
+          }
+        });
+      },
+      minLength: 1, // because most tags are so short - and there are not that many tags,
+      select: function( event, ui ) {
+      //  log( ui.item ?  "Selected: " + ui.item.label : "Nothing selected, input was " + this.value);
+          getRecordCount()
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
   $('#docList_table').css({ display: 'none' });
   $('#pager').css({ display: 'none' });
   $('#docList_table').tablesorter({widthFixed: true, widgets: ['zebra']});
@@ -34,9 +74,21 @@ $(document).ready(function() {
          .progressbar({ value: 0, })
          .css({ display: '' });
 
+  loadListData();
+});
+
+function loadListData() {
+
   $.ajax({ url: "dynamic",
          dataType: "xml",
-         data: {action: "getDocList"},
+             data: {action: "docFilter",
+                    subaction: "fullList",
+                    textSearch: $('#textSearch').val(),
+                    startDate: $('#startDate').val(),
+                    endDate: $('#endDate').val(),
+                    tags: $('#tags').val()
+                   },
+
          cache: false,
          type: "POST",
          success: function(data){
@@ -44,17 +96,16 @@ $(document).ready(function() {
               alert($(data).find('error').text());
               return 1;
             }
-            totalRows = $(data).find('count').text();
+            totalRows = $(data).find('DocFilter').find('count').text();
             count = 0;
-            dta = data;
+            dta = $(data).find('DocFilter').find('Results');
             $('#docList_table').css({ display: 'none' });
             $('#pager').css({ display: 'none' });
             cc = 0;
             processData();
          }
        });
-});
-
+}
 
 function get_cookie (cookie_name) {
   var results = document.cookie.match( '(^|;) ?' + cookie_name + '=([^;]*)(;|$)' );
@@ -66,7 +117,7 @@ function get_cookie (cookie_name) {
 
 function processData(){
 
-  rw = $(dta).find('row')[count];
+  rw = $(dta).find('Row')[count];
 
   if(!rw) {
     $("#progressContainer").css({ display: 'none' });
@@ -87,6 +138,7 @@ function processData(){
   else {
     count++;
     var docid = $(rw).find('docid').text();
+    var actionrequired = $(rw).find('actionrequired').text();
     var title = $(rw).find('title').text();
     var type = $(rw).find('type').text();
     var date = $(rw).find('date').text();
@@ -95,7 +147,15 @@ function processData(){
     var id = document.createAttribute('id');
     tr.setAttribute('id','docid_'+docid);
     var e_docid = document.createElement("td");
+    e_docid.setAttribute('class','indicator');
     e_docid.appendChild(document.createTextNode(docid));
+    if(actionrequired!="1") {
+      e_docid.appendChild(document.createTextNode(" "));
+    } else {
+      var img = document.createElement("img");
+      img.setAttribute('src','/opendias/images/actionrequired.png');
+      e_docid.appendChild(img);
+    }
     tr.appendChild(e_docid);
     var e_title = document.createElement("td");
     e_title.appendChild(document.createTextNode(title));

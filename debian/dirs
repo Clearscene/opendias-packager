@@ -1,6 +1,6 @@
 etc/opendias
 etc/init.d
-usr/local/sbin
+usr/local/bin
 usr/local/share/opendias
 var/lib/opendias
 var/log/opendias

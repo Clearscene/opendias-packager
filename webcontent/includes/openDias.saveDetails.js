@@ -1,4 +1,4 @@
-formFields = new Array( 'title', 'docDate', 'extractedText' );
+formFields = new Array( 'title', 'actionrequired', 'docDate', 'ocrtext' );
 
 function sendUpdate(kkey, vvalue) {
 
@@ -24,16 +24,15 @@ function sendUpdate(kkey, vvalue) {
 
 }
 
-function moveTag(tagid, add_remove) {
+function moveTag(tag, docid, action) {
 
     lockForm();
-    id = tagid.replace(new RegExp("tagid_"),"");
     $.ajax({ url: "/opendias/dynamic",
              dataType: "xml",
-             data: {action: "moveTag", 
-                    docid: $('#docid').text(),
-                    tagid: id,
-                    add_remove: add_remove,
+             data: {action: "moveTag",
+                    subaction: action, 
+                    docid: docid,
+                    tag: tag,
                    },
              cache: false,
              type: "POST",
@@ -46,9 +45,6 @@ function moveTag(tagid, add_remove) {
                }
              }
            });
-   // MOVE ME so this runs after success only **********************
-   physicallyMoveTag(tagid);
-
 }
 
 function lockForm() {
@@ -58,7 +54,7 @@ function unlockForm(success) {
   changeFormState(false);
   if(success) {
     $('#saveAlert').show();
-    $('#saveAlert').fadeOut(1000);
+    $('#saveAlert').fadeOut(4000);
   }
 }
 function changeFormState(state) {
@@ -70,43 +66,6 @@ function changeFormState(state) {
     }
   }
 }
-function physicallyMoveTag(tagid) {
-
-  // If tags parent is "available" then move to "selected"
-  list = $('#'+tagid).parent().parent().attr("id");
-  tr = document.getElementById(tagid);
-  if(list=="available") {
-    document.getElementById('available').getElementsByTagName('tbody')[0].removeChild(tr);
-    document.getElementById('selected').getElementsByTagName('tbody')[0].appendChild(tr);
-    $('#'+tagid).one('dblclick', function() {
-      moveTag( $(this).attr('id'), 'remove' );
-    });
-  } else {
-    document.getElementById('selected').getElementsByTagName('tbody')[0].removeChild(tr);
-    document.getElementById('available').getElementsByTagName('tbody')[0].appendChild(tr);
-    $('#'+tagid).one('dblclick', function() {
-      moveTag( $(this).attr('id'), 'add' );
-    });
-  }
-
-  $("#available")
-    .trigger("update")
-    .trigger("appendCache")
-    .trigger("sorton",[sorting]);
-  $("#selected")
-    .trigger("update")
-    .trigger("appendCache")
-    .trigger("sorton",[sorting]);
-
-//  var tr = document.createElement("tr");
-//  var id = document.createAttribute('id');
-//  tr.setAttribute('id','tagid_'+tagid);
-//  var e_tag = document.createElement("td");
-//  e_tag.appendChild(document.createTextNode(tag));
-//  tr.appendChild(e_tag);
-
-}
-
 function oncloseEvent() {
   var notComplete = 0;
   var msg = "";
@@ -132,7 +91,11 @@ $(document).ready(function() {
 
   for ( var key in formFields ) {
     $('#'+formFields[key]).change(function(){
-      sendUpdate( $(this).attr('id'), $(this).val() );
+      if($(this).is(':checkbox')) {
+        sendUpdate( $(this).attr('id'), $(this).is(':checked') );
+      } else {
+        sendUpdate( $(this).attr('id'), $(this).val() );
+      }
     });
   }
 
@@ -141,13 +104,18 @@ $(document).ready(function() {
     if (answer){
       $.ajax({ url: "/opendias/dynamic",
              dataType: "xml",
-             data: {action: "deletedoc", 
+             data: {action: "deleteDoc", 
                     docid: $('#docid').text(),
                    },
              cache: false,
              type: "POST",
              success: function(data){
-               document.location.href = "/opendias/";
+               if( $(data).find('error').text() ) {
+                 alert("An error occured deleting the document.");
+                 unlockForm(0);
+               } else {
+                 document.location.href = "/opendias/";
+               }
              },
       });
     }

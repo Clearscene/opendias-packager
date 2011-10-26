@@ -58,7 +58,7 @@
   }
   .innerLeftDisplay {
     float: left;
-    width: 80px;
+    width: 90px;
   }
   .innerLeftDisplay div {
     float: left;
@@ -79,6 +79,9 @@
     float: left;
     position: relative;
     width: 215px;
+  }
+  .row select {
+    margin-top: -2px;
   }
 
   #menu {
@@ -356,7 +359,9 @@
     border-color: #C9C9C9;
     -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
   } 
-
+  input[disabled], textarea[disabled]  {
+    background: #eee;
+  }
   .gOut {
     position: absolute;
     left: -45px;
@@ -365,4 +370,7 @@
     width: 100%;
     margin-bottom: 15px;
     min-height: 350px;
+  }
+  .indicator img {
+    margin-left: 15px;
   }

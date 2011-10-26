@@ -1,3 +1,29 @@
+clearscene-opendias (0.7) natty; urgency=low
+
+  * Fix an issue with bad setting of SANE options. (some user could not set the resolution)
+  * Added language selection for OCR operations
+  * Fix install problem if installation is already found
+  * Improved build instructions
+  * Fix build problem on Fedora
+  * Layed the groundwork for device locking
+  * Various tidy-ups
+  * Unified the backed response structure and defined an API
+  * Added direct API calls examples
+  * Added an "ideas" link and fixed typos/spelling error, on the application homepage.
+  * Removed the dependency on glib
+  * Moved around the doclist page to better show fix vs. user defined, options
+  * Added new admin app to easily set config options
+  * Improved the selection and assignment of tags
+  * Improved the filtering of the document list
+
+ -- wbooth <wbooth@clearscene.net>  Wed, 26 Oct 2011 18:00:30 +0100
+
+clearscene-opendias (0.6.6.2) lucid; urgency=low
+
+  * A bunch of new functionality - for testing
+
+ -- wbooth <wbooth@clearscene.net>  Mon, 24 Oct 2011 00:31:36 +0100
+
 clearscene-opendias (0.6.6.1) lucid; urgency=low
 
   * Fix for HP scanners (display but will not honour negative tl-y)
