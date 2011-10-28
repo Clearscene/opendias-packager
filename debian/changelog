@@ -1,3 +1,9 @@
+clearscene-opendias (0.7.1) natty; urgency=low
+
+  * fix loggin (to allow % marks)
+
+ -- wbooth <wbooth@clearscene.net>  Fri, 28 Oct 2011 10:23:27 +0100
+
 clearscene-opendias (0.7) natty; urgency=low
 
   * Fix an issue with bad setting of SANE options. (some user could not set the resolution)
