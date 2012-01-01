@@ -1,5 +1,3 @@
-var sorting = [[1,0]]; // sort by date desc
-
 // Read a page's GET URL variables and return them as an associative array.
 function getUrlVars() {
     var vars = [], hash;
@@ -68,12 +66,18 @@ $(document).ready(function() {
            else if( $(data).find('DocDetail').find('type').text() == "2" || $(data).find('DocDetail').find('type').text() == "4") {
              // Set images and default width
              for( x=1 ; x<=parseInt($(data).find('DocDetail').find('pages').text()) ; x++ ) {
-               $("#slider ul").append("<li><div class='scanImageContainer zoom'><img id='scanImage"+x+"' alt='' src='/opendias/scans/"+officialDocId+"_"+x+".jpg' /></div></li>");
+               $("#slider ul").append("<li><div class='scanImageContainer zoom'><img id='scanImage"+x+"' " + 
+                                      "alt='' src='/opendias/scans/"+officialDocId+"_"+x+".jpg' />" + 
+                                      "</div><button id='openImg_"+x+"'>Open "+x+" Fullsize</button></li>");
                $("#scanImage"+x).css("width", "300px");
+               $("#openImg_"+x).bind('click', { page: x, docId: officialDocId }, 
+                                  function(e){ 
+                                      window.open("/opendias/scans/"+e.data.docId+"_"+e.data.page+".jpg"); 
+                                  });
              }
 
              // setup the slider
-             $("#slider li").css("height", 30+($(data).find('DocDetail').find('y').text() * ( 300 / $(data).find('DocDetail').find('x').text() ))+"px" );
+             $("#slider li").css("height", 45+($(data).find('DocDetail').find('y').text() * ( 300 / $(data).find('DocDetail').find('x').text() ))+"px" );
              if($(data).find('DocDetail').find('pages').text() != "1") {
                $("#slider").easySlider({prevText:'', nextText:''});
              }
@@ -88,6 +92,7 @@ $(document).ready(function() {
                                    lighbox: false
                                    });
              }
+
            }
 
            else if( $(data).find('DocDetail').find('type').text() == "3" ) { // PDF Documents
@@ -103,7 +108,7 @@ $(document).ready(function() {
 
            $("#tags").val( tags.join() );
            $('#tags').tagsInput({
-                autocomplete_url: '', // Were going to use the ui.autocomplete (since the plugins autocomplete stuff doesn't seam to work cuorrectly. However, added this here as a hack to handle bluring correctly.
+                autocomplete_url: '', // Were going to use the ui.autocomplete (since the plugins autocomplete stuff doesn't seam to work correctly. However, added this here as a hack to handle bluring correctly.
                 onAddTag:function(tag) {
                           moveTag(tag,officialDocId,"addTag");
                           },
@@ -168,7 +173,9 @@ $(document).ready(function() {
       },
       minLength: 2,
       select: function( event, ui ) {
-      //  log( ui.item ?  "Selected: " + ui.item.label : "Nothing selected, input was " + this.value);
+        if(ui.item) {
+          sendUpdate( 'title', ui.item.label);
+        }
       },
       open: function() {
         $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );

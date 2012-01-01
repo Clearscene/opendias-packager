@@ -1,33 +1,6 @@
 var baron = 0;
 var canon = 0;
 
-function drawSkew(co, p, val) {
-  // CANVAS - transform
-  //   scaleX,      skewY_r,      
-  //   skewX_b      scaleY,    
-  //   translate_x, translate_y
-  if (navigator.userAgent == "HTMLUNIT") { // htmlunit cannot handle canvas methods (at least in 2.8)
-    return;
-  }
-  tr = 0;
-  boxSize = 15;
-  range = 50;
-  p.text(val+" px");
-  val = (-0.8*val) / range;
-  tr = (-boxSize*val)/2;
-  co.clearRect(0,0,boxSize,boxSize*2);
-  co.transform(1,  val,
-               0,  1,
-               0,  tr);
-  co.fillStyle = '#9999dd';
-  co.fillRect(0,8,boxSize,boxSize);
-  co.strokeStyle = '#000';
-  co.strokeRect(0,8,boxSize,boxSize);
-  co.transform(1,  val*(-1),
-               0,  1,
-               0,  tr*(-1));
-}
-
 function showStatus(dev, canv, prog) {
   if(canv == 1 && canon == 0) {
     $("#progressbar_"+dev).canvasLoader({'radius':20, 'dotRadius':2});
@@ -50,8 +23,11 @@ function showStatus(dev, canv, prog) {
 
 function getScanningProgress (progressId, device) {
 
+  var action = 'refresh';
+
   $.ajax({ url: "/opendias/dynamic",
 	 dataType: "xml",
+         async: false,
 	 data: {action: "getScanningProgress", 
 		scanprogressid: progressId,
 	       },
@@ -63,7 +39,6 @@ function getScanningProgress (progressId, device) {
              return 1;
            }
 
-           var finish = 0;
            status = parseInt( $(dta).find('ScanningProgress').find('status').text() );
            vvalue = parseInt( $(dta).find('ScanningProgress').find('value').text() );
 
@@ -76,7 +51,7 @@ function getScanningProgress (progressId, device) {
              $('#status_'+device).text("Internal Error.");
              showStatus(device, undefined, undefined);
              alert("Internal Error: " + vvalue);
-             finish = 1;
+             action='finish';
 
            } else if( status == 2 ) { // SCAN_DB_WORKING,
              $('#status_'+device).text("Waiting on the database.");
@@ -87,7 +62,7 @@ function getScanningProgress (progressId, device) {
              showStatus(device, undefined, undefined);
              $('#status_'+device).text("Error while scanning.");
              alert("Scanner Error: " + vvalue);
-             finish = 1;
+             action='finish';
 
            } else if( status == 4 ) { // SCAN_WAITING_ON_SCANNER,
              showStatus(device, undefined, undefined);
@@ -98,7 +73,7 @@ function getScanningProgress (progressId, device) {
              showStatus(device, undefined, undefined);
              $('#status_'+device).text("Error while scanning.");
              alert("Scanner Error: " + vvalue);
-             finish = 1;
+             action='finish';
 
            } else if( status == 6 ) { // SCAN_SCANNING,// Current progress
              $('#status_'+device).text("Scanning in progress.");
@@ -111,6 +86,52 @@ function getScanningProgress (progressId, device) {
              showStatus(device, undefined, undefined);
              $('#status_'+device).text("Please insert page "+vvalue+".");
              if(confirm("Please insert page "+vvalue+".")) {
+               action='postnewpage';
+             } else {
+               action='finish';
+             }
+
+           } else if( status == 8 ) { // SCAN_TIMEOUT_WAITING_ON_NEW_PAGE,
+             showStatus(device, undefined, undefined);
+             $('#status_'+device).text("Timeout while waiting for the next page.");
+             alert("Timeout waiting on the new page insert.");
+             action='finish';
+
+           } else if( status == 9 ) { // SCAN_CONVERTING_FORMAT,
+             $('#status_'+device).text("Converting scanned image format.");
+             showStatus(device, 1, undefined);
+
+           } else if( status == 10 ) { // SCAN_ERROR_CONVERTING_FORMAT,// FreeImage error code
+             showStatus(device, undefined, undefined);
+             $('#status_'+device).text("Error while converting scanned image format.");
+             alert("Image Processing Error: " + vvalue);
+             action='finish';
+
+           } else if( status == 11 ) { // SCAN_PERFORMING_OCR,
+             showStatus(device, 1, undefined);
+             $('#status_'+device).text("Performing OCR on scanned image.");
+
+           } else if( status == 12 ) { // SCAN_ERROR_PERFORMING_OCR,// xxxxxx error code
+             showStatus(device, undefined, undefined);
+             $('#status_'+device).text("Error while performing OCR operation.");
+             alert("OCR Error: " + vvalue);
+             action='finish';
+
+           } else if( status == 13 ) { // SCAN_RESERVED_3 (used to be FIXING_SKEW),
+           } else if( status == 14 ) { // SCAN_RESERVED_1,
+           } else if( status == 15 ) { // SCAN_RESERVED_2,
+           } else if( status == 16 ) { // SCAN_FINISHED
+             showStatus(device, undefined, undefined);
+             $('#status_'+device).text("Scan operation complete.");
+             document.location.href = "/opendias/docDetail.html?docid="+vvalue;
+             action='finish';
+
+           }
+	 }
+       });
+
+      if( action=='postnewpage' ) {
+
                $.ajax({ url: "/opendias/dynamic",
                       dataType: "xml",
                       data: {action: "nextPageReady",
@@ -125,54 +146,16 @@ function getScanningProgress (progressId, device) {
                         }
                       }
                     });
-             }
+                getScanningProgress(progressId,device);
 
-           } else if( status == 8 ) { // SCAN_TIMEOUT_WAITING_ON_NEW_PAGE,
-             showStatus(device, undefined, undefined);
-             $('#status_'+device).text("Timeout while waiting for the next page.");
-             alert("Timeout waiting on the new page insert.");
-             finish = 1;
+      } else if( action=='refresh' ) {
+        setTimeout("getScanningProgress('"+progressId+"','"+device+"')", 400);
 
-           } else if( status == 9 ) { // SCAN_CONVERTING_FORMAT,
-             $('#status_'+device).text("Converting scanned image format.");
-             showStatus(device, 1, undefined);
+      } else {
+        // do nothinog - just drop off and finish
 
-           } else if( status == 10 ) { // SCAN_ERROR_CONVERTING_FORMAT,// FreeImage error code
-             showStatus(device, undefined, undefined);
-             $('#status_'+device).text("Error while converting scanned image format.");
-             alert("Image Processing Error: " + vvalue);
-             finish = 1;
+      }
 
-           } else if( status == 11 ) { // SCAN_PERFORMING_OCR,
-             showStatus(device, 1, undefined);
-             $('#status_'+device).text("Performing OCR on scanned image.");
-
-           } else if( status == 12 ) { // SCAN_ERROR_PERFORMING_OCR,// xxxxxx error code
-             showStatus(device, undefined, undefined);
-             $('#status_'+device).text("Error while performing OCR operation.");
-             alert("OCR Error: " + vvalue);
-             finish = 1;
-
-           } else if( status == 13 ) { // SCAN_FIXING_SKEW,
-             showStatus(device, 1, undefined);
-             $('#status_'+device).text("Fixing 'skew' in image.");
-
-           } else if( status == 14 ) { // SCAN_RESERVED_1,
-           } else if( status == 15 ) { // SCAN_RESERVED_2,
-           } else if( status == 16 ) { // SCAN_FINISHED
-             showStatus(device, undefined, undefined);
-             $('#status_'+device).text("Scan operation complete.");
-             document.location.href = "/opendias/docDetail.html?docid="+vvalue;
-             finish = 1;
-
-           }
-
-           if(finish == 0) {
-             setTimeout("getScanningProgress('"+progressId+"','"+device+"')", 400);
-           }
-
-	 }
-       });
 }
 
 
@@ -205,8 +188,7 @@ $(document).ready(function() {
              var newTabHtml = document.getElementById('scannerTemplate').innerHTML;
              idchange = new Array('title', 'deviceid', 'format', 'pages', 'pagesSlider', 'resolution', 
                         'resolutionSlider', 'ocr', 'progressbar', 'resolutionDisplay', 'pagesDisplay', 
-                        'skew', 'skewDisplay_c', 'skewDisplay_p', 'skewSlider', 'scanButton', 'status', 
-                        'resolutionGood', 'length', 'lengthDisplay', 'lengthSlider');
+                        'scanButton', 'status', 'resolutionGood', 'length', 'lengthDisplay', 'lengthSlider');
              for (change in idchange) {
                //alert("replace: '" + idchange[change]+"_DEVICE'   with    '" + idchange[change]+"_"+device + "'.");
                newTabHtml = newTabHtml.replace(new RegExp(idchange[change]+"_DEVICE","g"), idchange[change]+"_"+device);
@@ -229,7 +211,7 @@ $(document).ready(function() {
                                       $(this).find("vendor").text() + " - " +
                                       $(this).find("model").text() + host);
              $('#deviceid_'+device).val( $(this).find("name").text() );
-             $('#format_'+device).append('<option>'+$(this).find("format").text()+'</option>');
+             //$('#format_'+device).append('<option>'+$(this).find("format").text()+'</option>');
              $("#resolutionSlider_"+device).slider({
                range: "min",
                value: parseInt($(this).find("default").text()),
@@ -286,24 +268,12 @@ $(document).ready(function() {
                  $("#pagesDisplay_"+device).text( ui.value + " pages" );
                }
              });
-             $("#skewSlider_"+device).slider({
-               value: 0,
-               min: -50,
-               max: 50,
-               step: 1,
-               slide: function(event, ui) {
-                 $("#skew_"+device).val( ui.value );
-                 drawSkew(document.getElementById("skewDisplay_c_"+device).getContext("2d"), $("#skewDisplay_p_"+device), ui.value);
-               }
-             });
-             drawSkew(document.getElementById("skewDisplay_c_"+device).getContext("2d"), $("#skewDisplay_p_"+device), 0);
              $("#scanButton_"+device).click( function() {
                // Stop the form from being changed after submittion
                $("#format_"+device).attr('disabled', 'disabled');
                $("#pagesSlider_"+device).slider('disable');
                $("#resolutionSlider_"+device).slider('disable');
                $("#ocr_"+device).attr('disabled', 'disabled');
-               $("#skewSlider_"+device).slider('disable');
                $("#lengthSlider_"+device).slider('disable');
                $("#scanButton_"+device).attr('disabled', 'disabled');
                $("#resolutionGood_"+device).parent().addClass("greyResolution");
@@ -316,7 +286,6 @@ $(document).ready(function() {
                                deviceid: $("#deviceid_"+device).val(),
                                format: $("#format_"+device).val(),
                                pages: $("#pages_"+device).val(),
-                               skew: $("#skew_"+device).val(),
                                resolution: $("#resolution_"+device).val(),
                                ocr: $("#ocr_"+device).val(),
                                pagelength: $("#length_"+device).val(),

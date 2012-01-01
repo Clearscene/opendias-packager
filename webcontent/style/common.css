@@ -25,6 +25,7 @@
    margin: 0px;
    font-family: arial;
    font-size: 0.9em;
+   height: 100%;
   }
   .container {
    width: 850px;
@@ -34,6 +35,7 @@
   #header {
    background-color: #7b0051;
    min-height: 100px;
+   background-image: url('/opendias/images/texture.png');
   }
   #logo {
     left: 10px;
@@ -89,7 +91,8 @@
    z-index: 20;
    background-color: #111;
    min-height: 20px;
-   
+   border-top: 1px solid #3b0011;
+   border-bottom: 2px solid #555;
   }
   #menu li {
    margin-top: 1px;
@@ -143,6 +146,7 @@
    background-color: #7b0051;
    height: 42px;
    text-align: center;
+   background-image: url('/opendias/images/texture.png');
   }
   #footer p {
    margin-top: 4px;
@@ -154,11 +158,6 @@
   }
 
   /*  ------- Page Elements ------ */
-
-  #doclist {
-    width: 85%;
-    padding-left: 15px;
-  }
 
   #filter {
    position: relative;
@@ -283,9 +282,6 @@
     background: #aa7777;
     border: 1px solid black;
   }
-  #safeKeeping {
-    display: none;
-  }
 
   .accessControl h3 {
     background-color: #9999ee;
@@ -373,4 +369,67 @@
   }
   .indicator img {
     margin-left: 15px;
+  }
+
+
+  #doclist {
+    width: 85%;
+    padding-left: 15px;
+  }
+
+  #results {
+    margin-bottom: 25px;
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+  }
+
+  .tablerow, .tableheader {
+    width: 700px;
+    clear: both;
+    padding: 8px;
+    min-height: 17px;
+    font-size: 0.9em;
+    cursor: pointer;
+  }
+  .tabledocid {
+    float: left;
+    margin-right: 6px;
+    width: 80px;
+  }
+  .tabletitle {
+    float: left;
+    margin-right: 6px;
+    width: 400px;
+  }
+  .tabletype {
+    float: left;
+    margin-right: 6px;
+    width: 110px;
+  }
+  .tabledate {
+    float: left;
+    margin-right: 6px;
+    width: 85px;
+  }
+  .zebra {
+   background-color: #ccccee;
+  }
+  .tablerow:hover {
+    background-color: #dddd77;
+  }
+  .tableheader {
+    font-weight: bold;
+  }
+  .tableheader div span {
+    float: left;
+  }
+  .tabledocid img {
+    padding-left: 5px;
+  }
+  #loading {
+    width: 100%; 
+    text-align: center; 
+    display: none; 
+    font-size: 2em; 
+    padding: 10px;
   }

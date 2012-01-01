@@ -1,3 +1,12 @@
+clearscene-opendias (0.7.2) oneiric; urgency=low
+
+  * Remove the de-skew functionality
+  * Improve OCR operations accuracy
+  * Allow documents to be opened full screen
+  * Revamp doc list and filter functionality
+
+ -- wbooth <wbooth@clearscene.net>  Sun, 01 Jan 2012 20:23:04 +0000
+
 clearscene-opendias (0.7.1) natty; urgency=low
 
   * fix loggin (to allow % marks)
