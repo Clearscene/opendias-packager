@@ -1,4 +1,12 @@
-clearscene-opendias (0.7.2) oneiric; urgency=low
+clearscene-opendias (0.7.3) oneiric; urgency=low
+
+  * Issue #9 - Scanners with 'word_list' resolutions
+  * Fix spinner viability on searching for scanners.
+  * Issue #10 - Scan images display is not permission checked
+
+ -- wbooth <wbooth@clearscene.net>  Wed, 11 Jan 2012 07:28:35 +0000
+
+clearscene-opendias (0.7.2) natty; urgency=low
 
   * Remove the de-skew functionality
   * Improve OCR operations accuracy
@@ -9,7 +17,11 @@ clearscene-opendias (0.7.2) oneiric; urgency=low
 
 clearscene-opendias (0.7.1) natty; urgency=low
 
-  * fix loggin (to allow % marks)
+  * Added an "ideas" link and fixed typos/spelling error, on the application homepage.
+  * Removed the dependency on glib
+  * Moved around the doclist page to better show fix vs. user defined, options
+  * Added new admin app to easily set config options
+  * Improved the selection and assignment of tags
 
  -- wbooth <wbooth@clearscene.net>  Fri, 28 Oct 2011 10:23:27 +0100
 
@@ -24,12 +36,6 @@ clearscene-opendias (0.7) natty; urgency=low
   * Various tidy-ups
   * Unified the backed response structure and defined an API
   * Added direct API calls examples
-  * Added an "ideas" link and fixed typos/spelling error, on the application homepage.
-  * Removed the dependency on glib
-  * Moved around the doclist page to better show fix vs. user defined, options
-  * Added new admin app to easily set config options
-  * Improved the selection and assignment of tags
-  * Improved the filtering of the document list
 
  -- wbooth <wbooth@clearscene.net>  Wed, 26 Oct 2011 18:00:30 +0100
 
