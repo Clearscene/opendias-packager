@@ -34,12 +34,12 @@ install: build
 
 # Build architecture-independent files here.
 binary-indep: install
-	cp etc/clearscene-opendias.sh ${TMP}/etc/init.d/clearscene-opendias.sh
-	cp conf/opendias.conf ${TMP}/etc/opendias/opendias.conf
-	cp opendias/src/opendias ${TMP}/usr/local/bin/opendias
-	cp opendias/src/opendiasconfig ${TMP}/usr/local/bin/opendiasconfig
-	cp opendias/webcontent ${TMP}/usr/local/share/opendias/ -r
-	cp opendias/sql/*.sql ${TMP}/usr/local/share/opendias/
+	cp ../etc/clearscene-opendias.sh ${TMP}/etc/init.d/clearscene-opendias.sh
+	cp ../conf/opendias.conf ${TMP}/etc/opendias/opendias.conf
+	cp src/opendias ${TMP}/usr/local/bin/opendias
+	cp src/opendiasconfig ${TMP}/usr/local/bin/opendiasconfig
+	cp webcontent ${TMP}/usr/local/share/opendias/ -r
+	cp sql/*.sql ${TMP}/usr/local/share/opendias/
 
 # Build architecture-dependent files here.
 binary-arch: install

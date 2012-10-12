@@ -53,6 +53,7 @@ refreshsource() {
   if test -f ../opendias-${VERSION}.tar.gz ; then
     # Expand a tarball if available
     tar -zxvf ../opendias-${VERSION}.tar.gz
+    mv opendias-${VERSION} opendias
 	elif test -d ../${LOCALREPO} ; then
     # Otherwise copy a local checkout of code
 		cp -r ../${LOCALREPO}/current_code opendias
@@ -92,16 +93,16 @@ packagerpm() {
 		echo BUILDING RPM ON FEDORA PLATFORM - TODO 
 		some_redhat_command 
 	else 
-		if [ "$OS" != "Ubuntu" ]; then 
-			echo Building an RPM is not supported in this platform
-			exit 1
-		else
-			if test ! -d clearscene-opendias_${VERSION}_${ARCH}.deb ; then
-				echo DEB package is not available. This is required to RPM build on none Fedora platforms
+		if [ "$OS" == "Ubuntu" ]; then 
+			if test ! -f clearscene-opendias_${VERSION}_${ARCH}.deb ; then
+				echo DEB package \(clearscene-opendias_${VERSION}_${ARCH}.deb\) is not available. This is required to RPM build on none Fedora platforms
 				exit
 			else
-				sudo alien -r clearscene-opendias_${VERSION}_${ARCH}.deb 
+				sudo alien -vkr clearscene-opendias_${VERSION}_${ARCH}.deb 
 			fi
+		else
+			echo Building an RPM is not supported in this platform
+			exit 1
 		fi 
 	fi 
 }
