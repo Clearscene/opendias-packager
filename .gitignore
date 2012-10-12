@@ -2,6 +2,4 @@ debian/clearscene-opendias.debhelper.log
 debian/clearscene-opendias.substvars
 debian/clearscene-opendias/
 debian/files
-cont
-webcontent
-bin
+opendias
