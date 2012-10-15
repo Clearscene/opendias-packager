@@ -35,6 +35,7 @@ fi
 
 clean() {
   # remove logs and temperary build file
+	rm -f clearscene-opendias*
 	rm -f opendias/debian/*.log
 	rm -f opendias/debian/clearscene-opendias.debhelper.log
 	rm -f opendias/debian/clearscene-opendias.substvars
