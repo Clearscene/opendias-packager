@@ -3,3 +3,9 @@ debian/clearscene-opendias.substvars
 debian/clearscene-opendias/
 debian/files
 opendias
+clearscene-opendias-*.rpm
+clearscene-opendias_*.dsc
+clearscene-opendias_*.tar.gz
+clearscene-opendias_*.build
+clearscene-opendias_*.changes
+clearscene-opendias_*.deb
