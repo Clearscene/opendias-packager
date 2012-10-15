@@ -45,6 +45,7 @@ clean() {
 
 distclean() {
   # cleanup source and build files
+  clean
 	rm -rf opendias
 }
 
