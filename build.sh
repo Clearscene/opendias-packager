@@ -13,8 +13,9 @@
 
 set -e
 
+PWD=`pwd`
 GITREPO="git://github.com/clearscene/opendias.git"
-LOCALREPO="clearscene-src-opendias"
+LOCALREPO="XXclearscene-src-opendias"
 DEPTH=`uname -m | sed 's/x86_//;s/i[3-6]86/32/' `
 VERSION=`head -1 debian/changelog | sed -e s/.*\(// -e s/\).*//`
 ARCH=`uname -i`
@@ -35,18 +36,18 @@ fi
 
 clean() {
   # remove logs and temperary build file
-	rm -f clearscene-opendias*
-	rm -f opendias/debian/*.log
-	rm -f opendias/debian/clearscene-opendias.debhelper.log
-	rm -f opendias/debian/clearscene-opendias.substvars
-	rm -fr opendias/debian/clearscene-opendias/
-	rm -fr opendias/debian/files
+  rm -f clearscene-opendias*
+  rm -f opendias/debian/*.log
+  rm -f opendias/debian/clearscene-opendias.debhelper.log
+  rm -f opendias/debian/clearscene-opendias.substvars
+  rm -fr opendias/debian/clearscene-opendias/
+  rm -fr opendias/debian/files
 }
 
 distclean() {
   # cleanup source and build files
   clean
-	rm -rf opendias
+  rm -rf opendias
 }
 
 refreshsource() {
@@ -56,13 +57,13 @@ refreshsource() {
     # Expand a tarball if available
     tar -zxvf ../opendias-${VERSION}.tar.gz
     mv opendias-${VERSION} opendias
-	elif test -d ../${LOCALREPO} ; then
+  elif test -d ../${LOCALREPO} ; then
     # Otherwise copy a local checkout of code
-		cp -r ../${LOCALREPO}/current_code opendias
-	else
+    cp -r ../${LOCALREPO} opendias
+  else
     # Finally, last resport, goto github and get a fresh clone
-		git clone ${GITREPO}
-	fi
+    git clone ${GITREPO} 
+  fi
 }
 
 buildsource() {
@@ -78,35 +79,38 @@ buildsource() {
 
 packagedeb() {
   # make a deb package from built source
-	if [ "$OS" != "Ubuntu" ]; then
-		echo Building a DEB is not supported in this platform 
-		exit
-	else
+  if [ "$OS" != "Ubuntu" ]; then
+    echo Building a DEB is not supported in this platform 
+    exit
+  else
     cp -r debian opendias
     cd opendias
-		debuild -uc -us
+    debuild -uc -us
     cd ../
-	fi
+  fi
 }
 
 packagerpm() {
   # make an rpm package from built source
-	if [ "$OS" == "Fedora" ]; then 
-		echo BUILDING RPM ON FEDORA PLATFORM - TODO 
-		some_redhat_command 
-	else 
-		if [ "$OS" == "Ubuntu" ]; then 
-			if test ! -f clearscene-opendias_${VERSION}_${ARCH}.deb ; then
-				echo DEB package \(clearscene-opendias_${VERSION}_${ARCH}.deb\) is not available. This is required to RPM build on none Fedora platforms
-				exit
-			else
-				sudo alien -vkr clearscene-opendias_${VERSION}_${ARCH}.deb 
-			fi
-		else
-			echo Building an RPM is not supported in this platform
-			exit 1
-		fi 
-	fi 
+#  if [ "$OS" == "Fedora" ]; then 
+    for DIR in `cat redhat/dirs`; do
+      mkdir -p redhat/install/${DIR}
+    done
+    redhat/rules
+    rpmbuild --buildroot=${PWD}'/redhat/install' -bb --target i386 'redhat/opendias.spec'
+#  else 
+#    if [ "$OS" == "Ubuntu" ]; then 
+#      if test ! -f clearscene-opendias_${VERSION}_${ARCH}.deb ; then
+#        echo DEB package \(clearscene-opendias_${VERSION}_${ARCH}.deb\) is not available. This is required to RPM build on none Fedora platforms
+#        exit
+#      else
+#        sudo alien -vkr clearscene-opendias_${VERSION}_${ARCH}.deb 
+#      fi
+#    else
+#      echo Building an RPM is not supported in this platform
+#      exit 0
+#    fi 
+#  fi 
 }
 
 checkversionbreakout() {
@@ -147,16 +151,16 @@ buildrpm() {
 
 case "$1" in
   help)
-	  echo all - default action - blat everything and build everything \(same as buildall\)
-	  echo clean - remove logs and temperary build files
-	  echo distclean - cleanup source and build files
-	  echo cleansource - put the source back to a non built state
-	  echo refreshsource - distclean, then get fresh sources
-	  echo buildsource - build the sources
-	  echo packageXXX - Generate a XXX package from build sources \[rpm, deb, all\]
-	  echo buildXXX - get, build and generate a XXX package from nothing \[rpm, deb, all\]
-	  echo 
-	  echo Running ${OS} ${ARCH} ${DEPTH}bit
+    echo all - default action - blat everything and build everything \(same as buildall\)
+    echo clean - remove logs and temperary build files
+    echo distclean - cleanup source and build files
+    echo cleansource - put the source back to a non built state
+    echo refreshsource - distclean, then get fresh sources
+    echo buildsource - build the sources
+    echo packageXXX - Generate a XXX package from build sources \[rpm, deb, all\]
+    echo buildXXX - get, build and generate a XXX package from nothing \[rpm, deb, all\]
+    echo 
+    echo Running ${OS} ${ARCH} ${DEPTH}bit
   ;;
 
   clean)
@@ -170,9 +174,9 @@ case "$1" in
   cleansource)
     # Put the source back to a non built state
     clean
-	  cd opendias
-	  make clean
-	  cd ../
+    cd opendias
+    make clean
+    cd ../
   ;;
 
   refreshsource)

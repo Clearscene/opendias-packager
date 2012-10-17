@@ -1,0 +1,17 @@
+#!/bin/bash
+
+TMP=redhat/install
+
+cp redhat/copyright ${TMP}/usr/share/doc/opendias/
+gzip -c opendias/ChangeLog > ${TMP}/usr/share/doc/opendias/changelog.gz
+
+#
+# *** Updating this, then also update debian/rules *** 
+#
+cp etc/clearscene-opendias.sh ${TMP}/etc/init.d/clearscene-opendias.sh
+cp conf/opendias.conf ${TMP}/etc/opendias/opendias.conf
+cp opendias/src/opendias ${TMP}/usr/local/bin/opendias
+cp opendias/src/opendiasconfig ${TMP}/usr/local/bin/opendiasconfig
+cp opendias/webcontent ${TMP}/usr/local/share/opendias/ -r
+cp opendias/sql/*.sql ${TMP}/usr/local/share/opendias/
+

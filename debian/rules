@@ -33,6 +33,9 @@ install: build
 	dh_installdirs
 
 # Build architecture-independent files here.
+#
+# *** Updating here, then also update redhat/rules ***
+#
 binary-indep: install
 	cp ../etc/clearscene-opendias.sh ${TMP}/etc/init.d/clearscene-opendias.sh
 	cp ../conf/opendias.conf ${TMP}/etc/opendias/opendias.conf
