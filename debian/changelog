@@ -1,4 +1,4 @@
-clearscene-opendias (0.8.1) precise; urgency=low
+opendias (0.8.1) precise; urgency=low
 
   * A localisation framework has been put in place (with en and de languages added)
   * Remove defunct speak functionality

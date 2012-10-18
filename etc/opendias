@@ -20,7 +20,7 @@ DAEMON=/usr/local/bin/opendias
 DAEMON_OPTS=""
 
 # script name
-NAME=clearscene-opendias.sh
+NAME=opendias
 
 # app name
 DESC=opendias

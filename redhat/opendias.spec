@@ -1,9 +1,9 @@
-Buildroot: /home/wbooth/git/rpm/clearscene-opendias-0.8.1
-Name: clearscene-opendias
+Buildroot: ./opendias
+Name: opendias
 Version: 0.8.1
 Release: 1
 Summary: Document Imaging Archive System (openDIAS).
-License: see /usr/share/doc/clearscene-opendias/copyright
+License: see /usr/share/doc/opendias/copyright
 Distribution: Debian
 Group: Converted/clearscene
 
@@ -129,7 +129,7 @@ Home document imaging, with OCR. Scan documents (with SANE) or import ODF docume
 "/usr/local/share/opendias/openDIAS.sqlite3.dmp.v4.sql"
 %dir "/etc/"
 %dir "/etc/init.d/"
-%config "/etc/init.d/clearscene-opendias.sh"
+%config "/etc/init.d/opendias.sh"
 %dir "/etc/opendias/"
 %config "/etc/opendias/opendias.conf"
 %dir "/var/"

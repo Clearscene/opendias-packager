@@ -1,4 +1,4 @@
-Source: clearscene-opendias
+Source: opendias
 Section: clearscene
 Priority: extra
 Maintainer: Wayne Booth <wbooth@clearscene.net>
@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 7), pkg-config
 Standards-Version: 3.8.0
 Homepage: http://opendias.essentialcollections.co.uk/
 
-Package: clearscene-opendias
+Package: opendias
 Architecture: any
 Depends: libc6, libsqlite3-0, libsane, libmicrohttpd5, uuid-runtime, libleptonica, libpoppler-cpp0, libtesseract3, tesseract-ocr-eng, libxml2, libzzip-0-13
 Description: Document Imaging Archive System (openDIAS).

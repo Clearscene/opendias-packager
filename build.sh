@@ -15,7 +15,7 @@ set -e
 
 PWD=`pwd`
 GITREPO="git://github.com/clearscene/opendias.git"
-LOCALREPO="XXclearscene-src-opendias"
+LOCALREPO="clearscene-src-opendias"
 DEPTH=`uname -m | sed 's/x86_//;s/i[3-6]86/32/' `
 VERSION=`head -1 debian/changelog | sed -e s/.*\(// -e s/\).*//`
 ARCH=`uname -i`
@@ -36,12 +36,18 @@ fi
 
 clean() {
   # remove logs and temperary build file
-  rm -f clearscene-opendias*
+  rm -f opendias-*.rpm
+  rm -f opendias_*.dsc
+  rm -f opendias_*.tar.gz
+  rm -f opendias_*.build
+  rm -f opendias_*.changes
+  rm -f opendias_*.deb
   rm -f opendias/debian/*.log
-  rm -f opendias/debian/clearscene-opendias.debhelper.log
-  rm -f opendias/debian/clearscene-opendias.substvars
-  rm -fr opendias/debian/clearscene-opendias/
+  rm -f opendias/debian/opendias.debhelper.log
+  rm -f opendias/debian/opendias.substvars
+  rm -fr opendias/debian/opendias
   rm -fr opendias/debian/files
+  rm -fr redhat/opendias
 }
 
 distclean() {
@@ -92,25 +98,16 @@ packagedeb() {
 
 packagerpm() {
   # make an rpm package from built source
-#  if [ "$OS" == "Fedora" ]; then 
+  if [ "$OS" == "Fedora" ] || [ "$OS" == "Ubuntu" ]; then 
     for DIR in `cat redhat/dirs`; do
-      mkdir -p redhat/install/${DIR}
+      mkdir -p redhat/opendias/${DIR}
     done
     redhat/rules
     rpmbuild --buildroot=${PWD}'/redhat/install' -bb --target i386 'redhat/opendias.spec'
-#  else 
-#    if [ "$OS" == "Ubuntu" ]; then 
-#      if test ! -f clearscene-opendias_${VERSION}_${ARCH}.deb ; then
-#        echo DEB package \(clearscene-opendias_${VERSION}_${ARCH}.deb\) is not available. This is required to RPM build on none Fedora platforms
-#        exit
-#      else
-#        sudo alien -vkr clearscene-opendias_${VERSION}_${ARCH}.deb 
-#      fi
-#    else
-#      echo Building an RPM is not supported in this platform
-#      exit 0
-#    fi 
-#  fi 
+  else 
+    echo Building an RPM is not supported in this platform
+    exit 0
+  fi 
 }
 
 checkversionbreakout() {

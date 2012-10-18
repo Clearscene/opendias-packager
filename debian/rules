@@ -9,7 +9,7 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-TMP=`pwd`/debian/clearscene-opendias
+TMP=`pwd`/debian/opendias
 
 configure: configure-stamp
 
@@ -37,7 +37,7 @@ install: build
 # *** Updating here, then also update redhat/rules ***
 #
 binary-indep: install
-	cp ../etc/clearscene-opendias.sh ${TMP}/etc/init.d/clearscene-opendias.sh
+	cp ../etc/opendias ${TMP}/etc/init.d/opendias
 	cp ../conf/opendias.conf ${TMP}/etc/opendias/opendias.conf
 	cp src/opendias ${TMP}/usr/local/bin/opendias
 	cp src/opendiasconfig ${TMP}/usr/local/bin/opendiasconfig
