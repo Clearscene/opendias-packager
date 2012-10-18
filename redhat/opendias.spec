@@ -129,7 +129,7 @@ Home document imaging, with OCR. Scan documents (with SANE) or import ODF docume
 "/usr/local/share/opendias/openDIAS.sqlite3.dmp.v4.sql"
 %dir "/etc/"
 %dir "/etc/init.d/"
-%config "/etc/init.d/opendias.sh"
+%config "/etc/init.d/opendias"
 %dir "/etc/opendias/"
 %config "/etc/opendias/opendias.conf"
 %dir "/var/"

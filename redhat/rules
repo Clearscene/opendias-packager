@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TMP=redhat/install
+TMP=redhat/opendias
 
 cp redhat/copyright ${TMP}/usr/share/doc/opendias/
 gzip -c opendias/ChangeLog > ${TMP}/usr/share/doc/opendias/changelog.gz
