@@ -1,0 +1,10 @@
+[Unit]
+Description=Opendias, document archive service
+After=syslog.target
+
+[Service]
+ExecStart=/usr/local/bin/opendias
+Type=forking
+
+[Install]
+WantedBy=multi-user.target

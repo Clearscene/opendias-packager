@@ -1,7 +1,7 @@
 etc/opendias
-etc/init.d
 usr/local/bin
 usr/local/share/opendias
+usr/lib/systemd/system
 usr/share/doc/opendias
 var/lib/opendias
 var/log/opendias

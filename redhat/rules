@@ -8,7 +8,7 @@ gzip -c opendias/ChangeLog > ${TMP}/usr/share/doc/opendias/changelog.gz
 #
 # *** Updating this, then also update debian/rules *** 
 #
-cp etc/opendias ${TMP}/etc/init.d/opendias
+cp etc/opendias.service ${TMP}/usr/lib/systemd/system/opendias.service
 cp conf/opendias.conf ${TMP}/etc/opendias/opendias.conf
 cp opendias/src/opendias ${TMP}/usr/local/bin/opendias
 cp opendias/src/opendiasconfig ${TMP}/usr/local/bin/opendiasconfig

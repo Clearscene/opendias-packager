@@ -14,8 +14,15 @@ Group: Converted/clearscene
 %description
 Home document imaging, with OCR. Scan documents (with SANE) or import ODF documents, assign tags. Use openDIAS to store all our letters, bills, statements, etc in a convenient, safe and easily retrievable way.
 
+%post
+systemctl daemon-reload
+systemctl enable opendias.service
 
-(Converted from a deb package by alien version 8.86.)
+%preun
+systemctl stop opendias.service
+
+%postun
+systemctl daemon-reload
 
 %files
 %dir "/"
@@ -128,10 +135,13 @@ Home document imaging, with OCR. Scan documents (with SANE) or import ODF docume
 "/usr/local/share/opendias/openDIAS.sqlite3.dmp.v2.sql"
 "/usr/local/share/opendias/openDIAS.sqlite3.dmp.v4.sql"
 %dir "/etc/"
-%dir "/etc/init.d/"
-%config "/etc/init.d/opendias"
 %dir "/etc/opendias/"
 %config "/etc/opendias/opendias.conf"
+%dir "/usr/"
+%dir "/usr/lib/"
+%dir "/usr/lib/systemd/"
+%dir "/usr/lib/systemd/system/"
+%config "/usr/lib/systemd/system/opendias.service"
 %dir "/var/"
 %dir "/var/log/"
 %dir "/var/log/opendias/"
