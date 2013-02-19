@@ -3,7 +3,7 @@ Description=Opendias, document archive service
 After=syslog.target
 
 [Service]
-ExecStart=/usr/local/bin/opendias
+ExecStart=/usr/bin/opendias
 Type=forking
 
 [Install]

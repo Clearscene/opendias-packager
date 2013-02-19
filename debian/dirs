@@ -1,6 +1,11 @@
 etc/opendias
 etc/init.d
-usr/local/bin
-usr/local/share/opendias
+usr/bin
+usr/share/opendias
+usr/share/opendias/webcontent
+usr/share/opendias/webcontent/includes
+usr/share/opendias/webcontent/includes/local
+usr/share/opendias/webcontent/images
+usr/share/opendias/webcontent/style
 var/lib/opendias
 var/log/opendias

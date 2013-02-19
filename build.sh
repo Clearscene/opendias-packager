@@ -61,13 +61,16 @@ refreshsource() {
   # Get back to a known place and then get the source
   if test -f ../opendias-${VERSION}.tar.gz ; then
     # Expand a tarball if available
+    echo Expanding the tarball ../opendias-${VERSION}.tar.gz
     tar -zxvf ../opendias-${VERSION}.tar.gz
     mv opendias-${VERSION} opendias
   elif test -d ../${LOCALREPO} ; then
     # Otherwise copy a local checkout of code
+    echo Copying from ../${LOCALREPO}
     cp -r ../${LOCALREPO} opendias
   else
     # Finally, last resport, goto github and get a fresh clone
+    echo Cloning from ${GITREPO}
     git clone ${GITREPO} 
   fi
 }
@@ -75,10 +78,9 @@ refreshsource() {
 buildsource() {
   # Build the source
   cd opendias
-  if test ! -f configure ; then
-    autoreconf -iv
-  fi
-  ./configure
+  autoreconf -iv
+  ./configure --prefix=/usr --enable-force_var_at_root 
+  make clean
   make
   cd ../
 }

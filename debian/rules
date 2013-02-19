@@ -39,10 +39,16 @@ install: build
 binary-indep: install
 	cp ../etc/opendias ${TMP}/etc/init.d/opendias
 	cp ../conf/opendias.conf ${TMP}/etc/opendias/opendias.conf
-	cp src/opendias ${TMP}/usr/local/bin/opendias
-	cp src/opendiasconfig ${TMP}/usr/local/bin/opendiasconfig
-	cp webcontent ${TMP}/usr/local/share/opendias/ -r
-	cp sql/*.sql ${TMP}/usr/local/share/opendias/
+	cp src/opendias ${TMP}/usr/bin/opendias
+	cp src/opendiasconfig ${TMP}/usr/bin/opendiasconfig
+	cp webcontent/*.html.* ${TMP}/usr/share/opendias/webcontent/
+	cp webcontent/includes/*.js ${TMP}/usr/share/opendias/webcontent/includes/
+	cp webcontent/includes/*.txt.* ${TMP}/usr/share/opendias/webcontent/includes/
+	cp webcontent/includes/local/*.resource.* ${TMP}/usr/share/opendias/webcontent/includes/local/
+	cp webcontent/images ${TMP}/usr/share/opendias/webcontent/ -r
+	cp webcontent/style ${TMP}/usr/share/opendias/webcontent/ -r
+	cp sql/*.sql ${TMP}/usr/share/opendias/
+	cp i18n/*.resource.* ${TMP}/usr/share/opendias/
 
 # Build architecture-dependent files here.
 binary-arch: install

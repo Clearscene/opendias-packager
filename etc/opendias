@@ -11,10 +11,10 @@
 ### END INIT INFO
 
 # path to app
-APP_PATH=/usr/local/bin/
+APP_PATH=/usr/bin/
 
 # path to paster bin
-DAEMON=/usr/local/bin/opendias
+DAEMON=/usr/bin/opendias
 
 # startup args
 DAEMON_OPTS=""
