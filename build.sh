@@ -105,7 +105,8 @@ packagerpm() {
       mkdir -p redhat/opendias/${DIR}
     done
     redhat/rules
-    rpmbuild --buildroot=${PWD}'/redhat/opendias' -bb --target i386 'redhat/opendias.spec'
+    #rpmbuild --buildroot=${PWD}'/redhat/opendias' -bb --target i386 'redhat/opendias.spec'
+    rpmbuild --buildroot=${PWD}'/redhat/opendias' -bb 'redhat/opendias.spec'
   else 
     echo Building an RPM is not supported in this platform
     exit 0

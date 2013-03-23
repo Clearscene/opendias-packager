@@ -1,7 +1,7 @@
 etc/opendias
 usr/bin
-usr/opendias
 usr/lib/systemd/system
-usr/doc/opendias
+usr/share/doc/opendias
+usr/share/opendias
 var/lib/opendias
 var/log/opendias
