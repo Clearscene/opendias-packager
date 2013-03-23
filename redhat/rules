@@ -10,8 +10,8 @@ gzip -c opendias/ChangeLog > ${TMP}/usr/share/doc/opendias/changelog.gz
 #
 cp etc/opendias.service ${TMP}/usr/lib/systemd/system/opendias.service
 cp conf/opendias.conf ${TMP}/etc/opendias/opendias.conf
-cp opendias/src/opendias ${TMP}/usr/local/bin/opendias
-cp opendias/src/opendiasconfig ${TMP}/usr/local/bin/opendiasconfig
-cp opendias/webcontent ${TMP}/usr/local/share/opendias/ -r
-cp opendias/sql/*.sql ${TMP}/usr/local/share/opendias/
+cp opendias/src/opendias ${TMP}/usr/bin/opendias
+cp opendias/src/opendiasconfig ${TMP}/usr/bin/opendiasconfig
+cp opendias/webcontent ${TMP}/usr/share/opendias/ -r
+cp opendias/sql/*.sql ${TMP}/usr/share/opendias/
 

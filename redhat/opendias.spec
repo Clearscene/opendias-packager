@@ -1,9 +1,9 @@
 Buildroot: ./opendias
 Name: opendias
-Version: 0.8.1
+Version: 0.9.1
 Release: 1
 Summary: Document Imaging Archive System (openDIAS).
-License: see /usr/share/doc/opendias/copyright
+License: see /usr/doc/opendias/copyright
 Distribution: Debian
 Group: Converted/clearscene
 
@@ -50,15 +50,19 @@ systemctl daemon-reload
 %dir "/usr/share/opendias/webcontent/"
 "/usr/share/opendias/webcontent/accessControls.html.de"
 "/usr/share/opendias/webcontent/accessControls.html.en"
+"/usr/share/opendias/webcontent/accessControls.html.nl"
 "/usr/share/opendias/webcontent/acquire.html.de"
 "/usr/share/opendias/webcontent/acquire.html.en"
+"/usr/share/opendias/webcontent/acquire.html.nl"
 "/usr/share/opendias/webcontent/body.html.de"
 "/usr/share/opendias/webcontent/body.html.en"
-"/usr/share/opendias/webcontent/buglist.html.en"
+"/usr/share/opendias/webcontent/body.html.nl"
 "/usr/share/opendias/webcontent/docDetail.html.de"
 "/usr/share/opendias/webcontent/docDetail.html.en"
+"/usr/share/opendias/webcontent/docDetail.html.nl"
 "/usr/share/opendias/webcontent/docList.html.de"
 "/usr/share/opendias/webcontent/docList.html.en"
+"/usr/share/opendias/webcontent/docList.html.nl"
 %dir "/usr/share/opendias/webcontent/images/"
 "/usr/share/opendias/webcontent/images/actionrequired.png"
 "/usr/share/opendias/webcontent/images/cabinet.jpg"
@@ -118,18 +122,25 @@ systemctl daemon-reload
 %dir "/usr/share/opendias/webcontent/includes/local/"
 "/usr/share/opendias/webcontent/includes/local/generic.resource.de"
 "/usr/share/opendias/webcontent/includes/local/generic.resource.en"
+"/usr/share/opendias/webcontent/includes/local/generic.resource.nl"
 "/usr/share/opendias/webcontent/includes/local/openDias.acquire.js.resource.de"
 "/usr/share/opendias/webcontent/includes/local/openDias.acquire.js.resource.en"
+"/usr/share/opendias/webcontent/includes/local/openDias.acquire.js.resource.nl"
 "/usr/share/opendias/webcontent/includes/local/openDias.docList.js.resource.de"
 "/usr/share/opendias/webcontent/includes/local/openDias.docList.js.resource.en"
+"/usr/share/opendias/webcontent/includes/local/openDias.docList.js.resource.nl"
 "/usr/share/opendias/webcontent/includes/local/openDias.filter.js.resource.de"
 "/usr/share/opendias/webcontent/includes/local/openDias.filter.js.resource.en"
+"/usr/share/opendias/webcontent/includes/local/openDias.filter.js.resource.nl"
 "/usr/share/opendias/webcontent/includes/local/openDias.getAccessDetails.js.resource.de"
 "/usr/share/opendias/webcontent/includes/local/openDias.getAccessDetails.js.resource.en"
+"/usr/share/opendias/webcontent/includes/local/openDias.getAccessDetails.js.resource.nl"
 "/usr/share/opendias/webcontent/includes/local/openDias.loadDetails.js.resource.de"
 "/usr/share/opendias/webcontent/includes/local/openDias.loadDetails.js.resource.en"
+"/usr/share/opendias/webcontent/includes/local/openDias.loadDetails.js.resource.nl"
 "/usr/share/opendias/webcontent/includes/local/openDias.saveDetails.js.resource.de"
 "/usr/share/opendias/webcontent/includes/local/openDias.saveDetails.js.resource.en"
+"/usr/share/opendias/webcontent/includes/local/openDias.saveDetails.js.resource.nl"
 %dir "/usr/share/opendias/webcontent/style/"
 "/usr/share/opendias/webcontent/style/common.css"
 "/usr/share/opendias/webcontent/style/datepicker.css"
