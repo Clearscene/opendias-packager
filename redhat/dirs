@@ -3,5 +3,8 @@ usr/bin
 usr/lib/systemd/system
 usr/share/doc/opendias
 usr/share/opendias
+usr/share/opendias/webcontent
+usr/share/opendias/webcontent/includes
+usr/share/opendias/webcontent/includes/local
 var/lib/opendias
 var/log/opendias
