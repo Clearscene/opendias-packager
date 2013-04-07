@@ -1,6 +1,6 @@
 Buildroot: ./opendias
 Name: opendias
-Version: 0.9.1
+Version: 0.9.2b
 Release: 1
 Summary: Document Imaging Archive System (openDIAS).
 License: see /usr/doc/opendias/copyright
