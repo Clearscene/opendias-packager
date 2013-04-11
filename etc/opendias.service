@@ -1,14 +1,12 @@
 [Unit]
-Description=Opendias, document archive service
+Description=openDias, document imaging archive service
 After=network.target
 
 [Service]
-# opendias ignores both pidfile and daemon arguments - but systemd requires them?
-ExecStart=/usr/bin/opendias
-#ExecStop=/usr/bin/kill -USR1 $MAINPID
-KillSignal=USR1
 Type=forking
+ExecStart=/usr/bin/opendias
 PIDFile=/var/run/opendias.pid
+KillSignal=USR1
 
 [Install]
 WantedBy=multi-user.target
