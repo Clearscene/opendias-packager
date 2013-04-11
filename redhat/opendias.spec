@@ -64,6 +64,8 @@ systemctl daemon-reload
 "/usr/share/opendias/webcontent/images/opendias.jpg"
 "/usr/share/opendias/webcontent/images/openDIAS_sml.png"
 "/usr/share/opendias/webcontent/images/texture.png"
+"/usr/share/opendias/webcontent/images/arrow.png"
+"/usr/share/opendias/webcontent/images/close.png"
 %dir "/usr/share/opendias/webcontent/images/datepicker/"
 "/usr/share/opendias/webcontent/images/datepicker/datepicker_bl.png"
 "/usr/share/opendias/webcontent/images/datepicker/datepicker_b.png"
