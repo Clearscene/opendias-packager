@@ -40,6 +40,7 @@ binary-indep: install
 	cp ../etc/opendias ${TMP}/etc/init.d/opendias
 	cp ../conf/opendias.conf ${TMP}/etc/opendias/opendias.conf
 	cp src/opendias ${TMP}/usr/bin/opendias
+	cp src/opendias_worker ${TMP}/usr/bin/opendias_worker
 	cp src/opendiasconfig ${TMP}/usr/bin/opendiasconfig
 	cp webcontent/*.html.* ${TMP}/usr/share/opendias/webcontent/
 	cp webcontent/includes/*.js ${TMP}/usr/share/opendias/webcontent/includes/

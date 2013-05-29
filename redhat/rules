@@ -11,6 +11,7 @@ gzip -c opendias/ChangeLog > ${TMP}/usr/share/doc/opendias/changelog.gz
 cp etc/opendias.service ${TMP}/usr/lib/systemd/system/opendias.service
 cp conf/opendias.conf ${TMP}/etc/opendias/opendias.conf
 cp opendias/src/opendias ${TMP}/usr/bin/opendias
+cp opendias/src/opendias_worker ${TMP}/usr/bin/opendias_worker
 cp opendias/src/opendiasconfig ${TMP}/usr/bin/opendiasconfig
 cp opendias/webcontent/*.html.* ${TMP}/usr/share/opendias/webcontent/
 cp opendias/webcontent/includes/*.js ${TMP}/usr/share/opendias/webcontent/includes/

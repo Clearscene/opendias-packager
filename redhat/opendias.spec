@@ -29,6 +29,7 @@ systemctl daemon-reload
 %config "/etc/opendias/opendias.conf"
 %config "/usr/lib/systemd/system/opendias.service"
 "/usr/bin/opendias"
+"/usr/bin/opendias_worker"
 "/usr/bin/opendiasconfig"
 %dir "/usr/share/opendias/"
 "/usr/share/opendias/openDIAS.sqlite3.dmp.v1.sql"
