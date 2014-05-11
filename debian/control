@@ -10,6 +10,6 @@ Package: opendias
 Architecture: any
 Conflicts: clearscene-opendias
 Replaces: clearscene-opendias
-Depends: libc6, libsqlite3-0, libsane, libmicrohttpd5, uuid-runtime, libleptonica, libpoppler-cpp0, libtesseract3, tesseract-ocr-eng, libxml2, libzzip-0-13, libmagic1, libssl1.0.0, libphash0
+Depends: libc6, libsqlite3-0, libsane, libmicrohttpd10, uuid-runtime, liblept4, libpoppler-cpp0, libtesseract3, tesseract-ocr-eng, libxml2, libzzip-0-13, libmagic1, libssl1.0.0, libphash0
 Description: Document Imaging Archive System (openDIAS).
  Home document imaging, with OCR. Scan documents (with SANE) or import ODF documents, assign tags. Use openDIAS to store all our letters, bills, statements, etc in a convenient, safe and easily retrievable way.
