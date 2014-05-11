@@ -1,3 +1,9 @@
+opendias (0.9.5) trusty; urgency=low
+
+  * Build for trusty
+
+ -- wbooth <wbooth@clearscene.net>  Sun, 11 May 2014 10:08:03 +0100
+
 opendias (0.9.4b) precise; urgency=low
 
   * Standards on configure.ac and MakeFile.am
