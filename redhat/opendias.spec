@@ -2,7 +2,7 @@ Buildroot: ./opendias
 Name: opendias
 Version: 0.9.5
 Release: 1
-Requires: libc.so.6 libsqlite3.so.0 libmicrohttpd.so.10 libcrypt.so.10 libssl.so.10 libuuid.so.1 sane-backends sane-backends-drivers-scanners iblept.so.3 file libtesseract.so.3 libxml2.so.2 libzzip-0.so.13 libpoppler-cpp.so.0
+Requires: libc.so.6 libsqlite3.so.0 libmicrohttpd.so.10 libcrypto.so.10 libssl.so.10 libuuid.so.1 sane-backends sane-backends-drivers-scanners liblept.so.3 file libtesseract.so.3 libxml2.so.2 libzzip-0.so.13 libpoppler-cpp.so.0
 Summary: Document Imaging Archive System (openDIAS).
 License: see /usr/doc/opendias/copyright
 Distribution: Debian
